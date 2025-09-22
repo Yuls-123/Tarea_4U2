@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Editar Equipo: {{ equipo.nombre }}</h2>
+<form method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                {{ form.nombre.label_tag }}
+                {{ form.nombre }}
+            </div>
+            <div class="mb-3">
+                {{ form.pais.label_tag }}
+                {{ form.pais }}
+            </div>
+            <div class="mb-3">
+                {{ form.ciudad.label_tag }}
+                {{ form.ciudad }}
+            </div>
+            <div class="mb-3">
+                {{ form.fundacion.label_tag }}
+                {{ form.fundacion }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                {{ form.estadio.label_tag }}
+                {{ form.estadio }}
+            </div>
+            <div class="mb-3">
+                {{ form.entrenador.label_tag }}
+                {{ form.entrenador }}
+            </div>
+            <div class="mb-3">
+                {{ form.capacidad_estadio.label_tag }}
+                {{ form.capacidad_estadio }}
+            </div>
+            <div class="mb-3">
+                {{ form.descripcion.label_tag }}
+                {{ form.descripcion }}
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Actualizar Equipo</button>
+    <a href="{% url 'home' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

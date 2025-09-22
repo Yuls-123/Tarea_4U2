@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mb-4">Equipos de Fútbol Registrados</h1>
+
+{% if equipos %}
+    <div class="row">
+        {% for equipo in equipos %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ equipo.nombre }}</h5>
+                        <p class="card-text">
+                            <strong>País:</strong> {{ equipo.pais }}<br>
+                            <strong>Ciudad:</strong> {{ equipo.ciudad }}<br>
+                            <strong>Estadio:</strong> {{ equipo.estadio }}<br>
+                            <strong>Entrenador:</strong> {{ equipo.entrenador }}
+                        </p>
+                        {% if user.is_authenticated and user == equipo.usuario %}
+                            <div class="btn-group">
+                                <a href="{% url 'editar_equipo' equipo.id %}" class="btn btn-sm btn-primary">Editar</a>
+                                <a href="{% url 'eliminar_equipo' equipo.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-info">
+        No hay equipos registrados. 
+        {% if user.is_authenticated %}
+            <a href="{% url 'crear_equipo' %}">¡Crea el primero!</a>
+        {% else %}
+            <a href="{% url 'login' %}">Inicia sesión</a> para crear equipos.
+        {% endif %}
+    </div>
+{% endif %}
+{% endblock %}
